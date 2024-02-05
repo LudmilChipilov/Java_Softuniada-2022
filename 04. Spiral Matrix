@@ -1,0 +1,98 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class SpiralMatrix
+{
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
+        int rows = Integer.parseInt(scanner.nextLine());
+        int cols = Integer.parseInt(scanner.nextLine());
+        int[][] intMatrix = new int[rows][cols];
+        List<Integer> lists = new ArrayList<>();
+        int counter = rows*cols;
+        int whileCounter = 0;
+        for (int row = 0; row < rows; row++)
+        {
+            String[] inputTokens = scanner.nextLine().split(" ");
+            for (int col = 0; col < cols; col++)
+            {
+                intMatrix[row][col] =
+                        Integer.parseInt(inputTokens[col]);
+            }
+        }
+        boolean isCount = false;
+        while(true)
+        {
+
+
+            for(int i = whileCounter; i < cols - whileCounter; i++)
+            {
+                lists.add(intMatrix[whileCounter][i]);
+                intMatrix[whileCounter][i] = 0;
+                if(lists.size() == counter)
+                {
+                    isCount = true;
+                    break;
+                }
+            }
+            if(isCount)
+            {
+                break;
+            }
+            for(int j = 1 + whileCounter; j <= rows - 1 - whileCounter; j++)
+            {
+                lists.add(intMatrix[j][cols - 1 - whileCounter]);
+                intMatrix[j][cols - 1 - whileCounter] = 0;
+                if(lists.size() == counter)
+                {
+                    isCount = true;
+                    break;
+                }
+            }
+            if(isCount)
+            {
+                break;
+            }
+            for(int k = cols - 2 - whileCounter; k >= whileCounter; k--)
+            {
+                lists.add(intMatrix[rows - 1 - whileCounter][k]);
+                intMatrix[rows - 1 - whileCounter][k] = 0;
+                if(lists.size() == counter)
+                {
+                    isCount = true;
+                    break;
+                }
+            }
+            if(isCount)
+            {
+                break;
+            }
+            for(int l = rows - 2 - whileCounter; l >= 1 + whileCounter; l--)
+            {
+                lists.add(intMatrix[l][whileCounter]);
+                intMatrix[l][whileCounter] = 0;
+                if(lists.size() == counter)
+                {
+                    isCount = true;
+                    break;
+                }
+            }
+            if(isCount)
+            {
+                break;
+            }
+            whileCounter++;
+
+
+        }
+
+       for(int i = 0; i < lists.size(); i++)
+       {
+
+           System.out.print(lists.get(i) + " ");
+       }
+
+    }
+}
